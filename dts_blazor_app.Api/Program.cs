@@ -14,6 +14,26 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// CHẠY MIGRATION + SEED Ở ĐÂY
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    try
+    {
+        var context = services.GetRequiredService<TodoListDbContext>();
+        context.Database.Migrate();
+
+        var logger = services.GetRequiredService<ILogger<TodoListDbContextSeed>>();
+        await new TodoListDbContextSeed().SeedAsync(context, logger);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Migration/Seeding failed");
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
