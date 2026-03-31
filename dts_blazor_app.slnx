@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="dts_blazor_app.Api/dts_blazor_app.Api.csproj" Id="6b8dcc15-f56d-4ab0-b17c-14e3743e4eee" />
   <Project Path="dts_blazor_server_to_do_list/dts_blazor_server_to_do_list.csproj" />
   <Project Path="dts_blazor_web_assembly_to_do_list/dts_blazor_web_assembly_to_do_list.csproj" Id="ce0cc3c0-4fa4-450a-8958-b5f311b69895" />
 </Solution>

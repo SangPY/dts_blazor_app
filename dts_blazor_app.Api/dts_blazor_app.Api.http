@@ -1,0 +1,6 @@
+@dts_blazor_app.Api_HostAddress = http://localhost:5171
+
+GET {{dts_blazor_app.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
