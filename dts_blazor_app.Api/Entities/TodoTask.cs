@@ -1,5 +1,6 @@
 ﻿using dts_blazor_app.Api.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.NetworkInformation;
 
 namespace dts_blazor_app.Api.Entities
@@ -8,8 +9,14 @@ namespace dts_blazor_app.Api.Entities
     {
         [Key]
         public Guid Id { get; set; }
+
+        [MaxLength(250)]
+        [Required]
         public string Name { get; set; }
 
+        public Guid? AssigneeId { get; set; }
+
+        [ForeignKey("AssigneeId")]
         public Guid? Assignee { get; set; }
 
         public DateTime CreatedDate { get; set; }
