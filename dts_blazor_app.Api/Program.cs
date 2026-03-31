@@ -1,5 +1,7 @@
 using dts_blazor_app.Api.Data;
+using dts_blazor_app.Api.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,10 +9,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TodoListDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Controllers
 builder.Services.AddControllers();
+
+// Swagger
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoList.Api", Version = "v1" });
+});
+
+// AddTransient ở đây
+builder.Services.AddTransient<ITaskRepository, TaskRepository>();
 
 var app = builder.Build();
 
